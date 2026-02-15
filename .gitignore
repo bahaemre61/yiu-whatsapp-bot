@@ -1,0 +1,16 @@
+# Bağımlılıklar
+node_modules/
+dist/
+
+# WhatsApp Oturum Verileri (Güvenlik için çok kritik!)
+.wwebjs_auth/
+.wwebjs_cache/
+session/
+
+# Gizli Değişkenler
+.env
+
+# Loglar ve Geçici Dosyalar
+npm-debug.log*
+yarn-error.log*
+.DS_Store

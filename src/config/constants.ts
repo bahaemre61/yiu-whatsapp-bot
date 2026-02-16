@@ -18,15 +18,19 @@ Hafta içi 08:30 - 17:30
 Saygılarımızla,
 *YİÜSEM*`,
 
-    MONDAY_DELAY: (pushname: string) => `Sayın [İsim Soyisim],
+    MONDAY_DELAY: (pushname: string) => `Sayın *${pushname}*,
 
 Yüksek İhtisas Üniversitesi Sürekli Eğitim Merkezi'ne hoş geldiniz.
 
-Hafta sonu mesaj birikimi nedeniyle yanıt süremiz uzayabilir.
+Hafta sonu mesaj birikimi nedeniyle yanıt süremiz uzayabilir. Size en kısa sürede yardımcı olmak için buradayız. Lütfen aşağıdaki bilgileri paylaşınız:
+ 
+* Adınız Soyadınız:
+* İlgilendiğiniz eğitim programı:
+* İletişim e-posta adresiniz:
 
 ⏰ TAHMİNİ YANIT SÜRESİ:
-• Sabah 08:30-12:00 arası mesaj sıralaması
-• Öğleden sonra 13:00-17:30 arası yanıtlar
+* Sabah 08:30-12:00 arası mesaj sıralaması
+* Öğleden sonra 13:00-17:30 arası yanıtlar
 
 📞 HIZLI DESTEK İÇİN ARAYIN:
 +90 501 700 20 28 (Mesai saatlerinde)

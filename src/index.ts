@@ -1,52 +1,28 @@
-import { Client, LocalAuth, Message } from 'whatsapp-web.js';
+import { Client, LocalAuth } from 'whatsapp-web.js';
 import qrcode from 'qrcode-terminal';
-import { MESSAGES } from './config/constants';
-import { isWorkHour, isMonday, isHoliday } from './utils/timeChecker';
+import { handleIncomingMessage } from './handlers/messageHandler';
+
+console.log("🚀 Sistem başlatılıyor...");
 
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
         handleSIGINT: false,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
     }
 });
 
-const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
-
 client.on('qr', (qr: string) => {
+    console.log('--- QR KODU OKUTUN ---');
     qrcode.generate(qr, { small: true });
 });
 
 client.on('ready', () => {
-    console.log('SEM Bot hazır ve bağlandı!');
+    console.log('YİÜSEM Botu aktif! Mesajlar bekleniyor...');
 });
 
-client.on('message', async (msg: Message) => {
-    if (msg.from.includes('@c.us')) {
-        const chat = await msg.getChat();
-        const contact = await msg.getContact();
-        const pushname = contact.pushname || " "; 
-
-        await chat.sendStateTyping();
-        await delay(2000);
-
-        let responseText = "";
-
-        if (isHoliday()) {
-            responseText = MESSAGES.HOLIDAY;
-        } else if (!isWorkHour()) {
-            responseText = MESSAGES.OFF_HOURS(pushname);
-        } else {
-            responseText = MESSAGES.WELCOME(pushname);
-            
-            if (isMonday()) {
-                responseText += "\n\n" + MESSAGES.MONDAY_DELAY;
-            }
-        }
-
-        await msg.reply(responseText);
-        await chat.sendSeen();
-    }
+client.on('message', async (msg) => {
+    await handleIncomingMessage(msg);
 });
 
 client.initialize();
